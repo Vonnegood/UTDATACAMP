@@ -9,6 +9,7 @@ import csv
 # Path to the files
 Bankcsv1 = os.path.join("PyBank","Resources","budget_data_1.csv")
 Bankcsv2 = os.path.join("PyBank","Resources","budget_data_2.csv")
+output_path = os.path.join("output","PyBankOutput.txt")
 
 # Variables for the report
 Periods = 0
@@ -27,6 +28,7 @@ with open(Bankcsv1, newline="") as Budgetfile1:
     for row in data:
         cur_month = int(row[1])
         Total_Revenue += int(row[1])
+        Total_Revenue = Total_Revenue + int(row[1])
 
         if int(row[1]) > int(Great_Inc[1]):
             Great_Inc = row
@@ -37,17 +39,18 @@ with open(Bankcsv1, newline="") as Budgetfile1:
             prev_month = int(row[1])
             continue
         else: 
-            Delta += (cur_month - prev_month) / 2
+            Delta += (cur_month - prev_month)
             prev_month = int(row[1]) # Revenue Change
-            print(Delta)
 
 Avg_RevChange = Delta / (int(Periods)-1)
 
-print(Avg_RevChange)
+# Write the file
+with open(output_path, 'w', newline="") as output:
+    csvwriter = csv.writer(output)
+    print("Financial Analysis \n ----------------------------")
+    print("Total Months: "+ str(Periods))
+    print("Total Revenue: $"+ str(Total_Revenue))
+    print(f"Average Revenue Change: ${Avg_RevChange}")
+    print(f"Greatest Increase in Revenue: {Great_Inc[0]} (${Great_Inc[1]})")
+    print(f"Greatest Decrease in Revenue: {Great_Dec[0]} (${Great_Dec[1]})")
 
-# print("Financial Analysis \n ----------------------------")
-# print("Total Months: "+ str(Periods))
-# print("Total Revenue: $"+ str(Total_Revenue))
-# print(f"Average Revenue Change: ${Avg_RevChange}")
-# print(f"Greatest Increase in Revenue: {Great_Inc[0]} (${Great_Inc[1]})")
-# print(f"Greatest Decrease in Revenue: {Great_Dec[0]} (${Great_Dec[1]})")
