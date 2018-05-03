@@ -30,7 +30,7 @@ with open(Bankcsv1, newline="") as Budgetfile1:
 
         if int(row[1]) > int(Great_Inc[1]):
             Great_Inc = row
-        elif int(row[1]) < int(Great_Dec[1]):
+        elif int(row[1]) < int(Great_Dec[1]):git 
             Great_Dec = row
         # Average Revenue Change: skip the first row
         if prev_month == "A" and Total_Revenue == int(row[1]):
