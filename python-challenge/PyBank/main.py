@@ -14,7 +14,7 @@ import csv
 Bankcsv1 = os.path.join("PyBank","Resources","budget_data_1.csv")
 Bankcsv2 = os.path.join("PyBank","Resources","budget_data_2.csv")
 output_path = os.path.join("PyBank","output","PyBankOutput.txt")
-print(output_path)
+
 # Variables for the report
 Periods = 0
 Total_Revenue = 0
@@ -25,8 +25,8 @@ Delta = 0.0
 Delta_Total = 0.0
 prev_month = "A"
 
-with open(Bankcsv2, newline="") as Budgetfile1:
-    reader = csv.reader(Budgetfile1)
+with open(Bankcsv2, newline="") as Budgetfile:
+    reader = csv.reader(Budgetfile)
     next(reader, None) #skip the header row
     data = list(reader) #save the data as a list
     Periods = len(data) # Months
