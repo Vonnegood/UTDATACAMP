@@ -1,6 +1,5 @@
 '''
-Need to work on removing the double-quotes from 'words'
-
+Need to work on removing special characters from 'words'
 
 '''
 import os
@@ -18,10 +17,12 @@ avg_sent_len = 0.0
 with open(ParaPath, newline="") as Parafile:
     reader = csv.reader(Parafile)
     Text = Parafile.read()
-    # print(Text)
+    #print(Text)
     sentences = re.split("(?<=[.!?]) +", Text)
     words = Text.split(" ") # Split sentence into words
+    print(words)
     for word in words: # to compute the average letter count per word
+        word = re.sub('[^A-Za-z0-9]+',"", word)
         word_len = len(word)
         Total_word_len += word_len
     avg_word_len = Total_word_len / len(words)
@@ -31,13 +32,10 @@ with open(ParaPath, newline="") as Parafile:
     avg_sent_len = Total_sent_len/len(sentences)
 
 
+# print(words[101]) # Is frock-coat one or two words?
 
-    
-    
-print(words[101]) # Is frock-coat one or two words?
-
-print("Paragraph Analysis \n -----------------")
-print(f"Approximate Word Count: {len(words)}")
-print(f"Approcimate Sentence Count: {len(sentences)}")
-print(f"Average Letter Count: {avg_word_len}")
-print(f"Average Sentence Length: {avg_sent_len}")
+# print("Paragraph Analysis \n -----------------")
+# print(f"Approximate Word Count: {len(words)}")
+# print(f"Approcimate Sentence Count: {len(sentences)}")
+# print(f"Average Letter Count: {avg_word_len}")
+# print(f"Average Sentence Length: {avg_sent_len}")
