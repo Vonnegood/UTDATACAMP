@@ -2,8 +2,8 @@ import os
 import csv
 
 # Filepaths
-filepath = os.path.join("PyPoll","raw_data","election_data_1.csv")
-outputpath = os.path.join("PyPoll","Output","poll.txt")
+filepath = os.path.join("raw_data","election_data_1.csv")
+outputpath = os.path.join("Output","poll.txt")
 
 # Variables
 Candidates = {}

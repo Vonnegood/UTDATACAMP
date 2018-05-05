@@ -1,19 +1,11 @@
-'''
-Export to file needs work
-
-Assumptions: There will never be a duplicate line for month-year combo
-             Data is held in the same manner in the files
-             
-'''
-
 
 import os
 import csv
 
 # Path to the files
-Bankcsv1 = os.path.join("PyBank","Resources","budget_data_1.csv")
-Bankcsv2 = os.path.join("PyBank","Resources","budget_data_2.csv")
-output_path = os.path.join("PyBank","output","PyBankOutput.txt")
+Bankcsv1 = os.path.join("Resources","budget_data_1.csv")
+Bankcsv2 = os.path.join("Resources","budget_data_2.csv")
+output_path = os.path.join("output","PyBankOutput.txt")
 
 # Variables for the report
 Periods = 0
