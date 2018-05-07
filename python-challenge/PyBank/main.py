@@ -3,9 +3,11 @@ import os
 import csv
 
 # Path to the files
-Bankcsv1 = os.path.join("Resources","budget_data_1.csv")
-Bankcsv2 = os.path.join("Resources","budget_data_2.csv")
-output_path = os.path.join("output","PyBankOutput.txt")
+file_name= input("Please input the file name that has been placed in the 'Resources' folder.\n    (Don't include the .csv. I'll add that):")
+csv_file = f"{file_name}.csv"
+filepath = os.path.join("Resources",csv_file)
+txt_file = f"{file_name}_output.txt"
+output_path = os.path.join("output",txt_file)
 
 # Variables for the report
 Periods = 0
@@ -17,7 +19,7 @@ Delta = 0.0
 Delta_Total = 0.0
 prev_month = "A"
 
-with open(Bankcsv2, newline="") as Budgetfile:
+with open(filepath, newline="") as Budgetfile:
     reader = csv.reader(Budgetfile)
     next(reader, None) #skip the header row
     data = list(reader) #save the data as a list
