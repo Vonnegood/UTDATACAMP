@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup as bs
 import pandas as pd
 from splinter import Browser
 import re
+from time import sleep
 
 # In[4]:
 def Scrape():
@@ -28,6 +29,7 @@ def Scrape():
     #visit the url
     url = 'https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest'
     browser.visit(url)
+    sleep(1)
 
     # Scrape the latest News Title and Paragraph Text
     html = browser.html
@@ -43,8 +45,8 @@ def Scrape():
 
     url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(url)
-
-    browser.click_link_by_id("full_image")
+    browser.find_by_id('full_image').click()
+    sleep(1)
     html = browser.html
     soup = bs(html,"html.parser")
     img = soup.find('img',class_="fancybox-image")['src']
@@ -60,6 +62,7 @@ def Scrape():
 
     url ="https://twitter.com/marswxreport?lang=en"
     browser.visit(url)
+    sleep(1)
 
     html = browser.html
     soup = bs(html,"html.parser")
@@ -81,11 +84,12 @@ def Scrape():
 
     url="https://space-facts.com/mars/"
     browser.visit(url)
+    sleep(1)
 
     tables = pd.read_html("https://space-facts.com/mars/")
 
     mars_table = tables[0]
-    html_table = mars_table.to_html()
+    html_table = mars_table.to_html(header=False, index=False)
 
 
     # #### Mars Hemisphere
@@ -104,6 +108,7 @@ def Scrape():
 
     for i in range(len(hemisphere_image_urls)):
         browser.visit(url)
+        sleep(1)
         name = hemisphere_image_urls[i]["title"]
         browser.click_link_by_partial_text(name)
         html = browser.html
@@ -111,5 +116,7 @@ def Scrape():
         download = soup.find_all("li")[-4]
         hemisphere_image_urls[i]["img_url"] = download.find('a')['href']
 
-        mars_data = {"Latest News Title":news_title,"Latest News Paragraph": news_p,"Featured Image": featured_image_url, "Mars Weather":mars_weather,"Mars Data Table": html_table,"Hemisphere Data": hemisphere_image_urls}
-        return mars_data
+    mars_data = {"latest_news_title":news_title,"latest_news_paragraph": news_p,"featured_image": featured_image_url, "mars_weather":mars_weather,"mars_data_table": html_table,"hemisphere_data": hemisphere_image_urls}
+    return mars_data
+
+# Scrape()
